@@ -1,14 +1,9 @@
 import os from 'node:os';
 import readline from 'node:readline';
-import { INVALID_INPUT } from './constants/index.js';
 import { commands } from "./commands/index.js";
 import { getUsernameFromArgs, handleError, printCwd, sayGoodbye } from "./utils/index.js";
 
-const username = getUsernameFromArgs(process.argv);
-if (!username) {
-    console.error(`${INVALID_INPUT}: Please run with --username=your_username`);
-    process.exit(1);
-}
+const username = getUsernameFromArgs(process.argv) || 'Anonymous';
 
 process.chdir(os.homedir());
 console.log(`Welcome to the File Manager, ${username}!`);

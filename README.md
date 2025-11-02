@@ -22,6 +22,8 @@ npm run start '--' '--username=your_name'
 node ./src/main.js -- --username=your_name
 ```
 
+**Note:** If you don't specify `--username`, the application will use "Anonymous" as the default username.
+
 ## Description
 
 Simple CLI File Manager using Node.js 24+ (no external dependencies).
