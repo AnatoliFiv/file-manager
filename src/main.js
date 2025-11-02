@@ -1,10 +1,8 @@
 import os from 'node:os';
 import readline from 'node:readline';
 import { INVALID_INPUT } from './constants/index.js';
-
 import { commands } from "./commands/index.js";
 import { getUsernameFromArgs, handleError, printCwd, sayGoodbye } from "./utils/index.js";
-
 
 const username = getUsernameFromArgs(process.argv);
 if (!username) {
@@ -21,7 +19,6 @@ const rl = readline.createInterface({
     output: process.stdout,
     prompt: '> ',
 });
-
 
 rl.on('line', async (input) => {
     const args = input.trim().split(/\s+/);
@@ -46,12 +43,10 @@ rl.on('line', async (input) => {
     rl.prompt();
 });
 
-
 rl.on('close', () => sayGoodbye(username));
 
 process.on('SIGINT', () => {
     rl.close();
 });
-
 
 rl.prompt();

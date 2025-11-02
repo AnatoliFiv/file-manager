@@ -38,7 +38,7 @@ export const ls = async (args) => {
     const tableData = entries
         .sort((a, b) => b.isDirectory() - a.isDirectory() || a.name.localeCompare(b.name))
         .map((entry) => ({
-            Name: entry.name.length > 40 ? entry.name.substring(0, 37) + '...' : entry.name,
+            Name: entry.name,
             Type: entry.isDirectory() ? 'directory' : 'file',
         }));
 

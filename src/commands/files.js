@@ -76,7 +76,6 @@ export const cp = async (args) => {
     const destPath = path.join(destDirPath, path.basename(srcPath));
 
     try {
-        await fs.access(srcPath);
         const destStats = await fs.stat(destDirPath);
         if (!destStats.isDirectory()) throw new Error(OPERATION_FAILED);
         await pipeline(createReadStream(srcPath), createWriteStream(destPath));
@@ -94,16 +93,11 @@ export const mv = async (args) => {
     const destPath = path.join(destDirPath, path.basename(srcPath));
 
     try {
-        await fs.access(srcPath);
         const destStats = await fs.stat(destDirPath);
         if (!destStats.isDirectory()) throw new Error(OPERATION_FAILED);
 
-        try {
-            await fs.rename(srcPath, destPath);
-        } catch (renameError) {
-            await pipeline(createReadStream(srcPath), createWriteStream(destPath));
-            await fs.unlink(srcPath);
-        }
+        await pipeline(createReadStream(srcPath), createWriteStream(destPath));
+        await fs.unlink(srcPath);
     } catch {
         throw new Error(OPERATION_FAILED);
     }
